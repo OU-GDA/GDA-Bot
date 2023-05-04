@@ -4,7 +4,7 @@
   "description": "The Discord bot application used by the Game Developers Association at the University of Oklahoma.",
   "main": "index.js",
   "scripts": {
-    "test": "npm run dev"
+    "test": "node index.js"
   },
   "keywords": [
     "discord"
