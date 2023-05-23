@@ -23,11 +23,21 @@ module.exports = {
 		.setName('vote')
         .setDescription('Generate a new vote message.'),
     async execute(interaction) {
+        // Get each voting icon
         const votingIcons = GetVotingIcons(3);
         if (votingIcons.length === 0) { return await interaction.reply("An Error Occured While Calling A Vote..."); }
 
+        // Generate the voting message's content
+        let content = `***${interaction.user.username}*** Has Called A Vote!\n`;
+        content += "**---------------------\n**";
+        for (const icon of votingIcons)
+        {
+            content += `OPTION  -  ${icon}\n`;
+        }
+
+        // Send the voting message
         const message = await interaction.reply({
-            content: 'Vote',
+            content: content,
             fetchReply: true
         });
 
