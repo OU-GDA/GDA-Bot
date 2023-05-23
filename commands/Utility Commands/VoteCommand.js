@@ -21,18 +21,26 @@ const GetVotingIcons = (count) =>
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('vote')
-        .setDescription('Generate a new vote message.'),
+        .setDescription('Generate a new vote message.')
+        .addStringOption(option => option
+            .setName("items")
+            .setDescription("The Items To Vote On, Seperated By A Space.")
+            .setRequired(true)
+        ),
     async execute(interaction) {
+        // Parse the voting options
+        const options = interaction.options.getString("items").split(' ');
+
         // Get each voting icon
-        const votingIcons = GetVotingIcons(3);
+        const votingIcons = GetVotingIcons(options.length);
         if (votingIcons.length === 0) { return await interaction.reply("An Error Occured While Calling A Vote..."); }
 
         // Generate the voting message's content
         let content = `***${interaction.user.username}*** Has Called A Vote!\n`;
         content += "**---------------------\n**";
-        for (const icon of votingIcons)
+        for (let i = 0; i < options.length; i++)
         {
-            content += `OPTION  -  ${icon}\n`;
+            content += `${options[i]}  -  ${votingIcons[i]}\n`;
         }
 
         // Send the voting message
