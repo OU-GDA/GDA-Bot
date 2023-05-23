@@ -1,6 +1,14 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Events, GatewayIntentBits, REST, Routes, Collection } = require('discord.js');
+const { 
+	Client, 
+	Events, 
+	GatewayIntentBits, 
+	REST, 
+	Routes, 
+	Collection
+} = require('discord.js');
+const { OfficerApplication } = require('./modals/OfficerApplication.js');
 const { token, clientId, guildId } = require('./config.json');
 
 // Create a new client instance
@@ -62,10 +70,19 @@ client.on(Events.InteractionCreate, async interaction => {
 	{
 		const command = interaction.client.commands.get(interaction.commandName);
 
-		if (!command) {
+		if (!command) 
+		{
 			if (interaction.isStringSelectMenu())
 			{
-				//TODO: Selection Handling
+				switch (interaction.customId)
+				{
+					case 'role_select': // Officer Application
+						await interaction.showModal(OfficerApplication);
+					break;
+					default:
+						await interaction.reply({ content: 'Unable To Process Selection. Please Try Again.', ephemeral: true });
+					break;
+				}
 			}
 			else
 			{
@@ -80,7 +97,14 @@ client.on(Events.InteractionCreate, async interaction => {
 		} 
 		else if (interaction.isModalSubmit()) 
 		{
-			//TODO: Modal Submission
+			switch (interaction.customId)
+			{
+				case 'application_modal':
+				break;
+				default:
+					await interaction.reply({ content: 'Unable To Process Submission. Please Try Again.', ephemeral: true });
+				break;
+			}
 		}
 	} 
 	catch (error) 
@@ -88,11 +112,11 @@ client.on(Events.InteractionCreate, async interaction => {
 		console.error(error);
 		if (interaction.replied || interaction.deferred) 
 		{
-			await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+			await interaction.followUp({ content: 'There Was An Error While Executing This Command!', ephemeral: true });
 		} 
 		else 
 		{
-			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+			await interaction.reply({ content: 'There Was An Error While Executing This Command!', ephemeral: true });
 		}
 	}
 });
