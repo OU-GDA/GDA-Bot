@@ -1,5 +1,6 @@
 {
     "token": "TOKEN_HERE",
     "clientId": "APP_ID_HERE",
-	"guildId": "SERVER_ID_HERE"
+	"guildId": "SERVER_ID_HERE",
+    "adminNotificationId": "CHANNEL_ID_HERE
 }
