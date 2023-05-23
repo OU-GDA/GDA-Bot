@@ -5,8 +5,11 @@ module.exports = {
 		.setName('vote')
         .setDescription('Generate a new vote message.'),
     async execute(interaction) {
-        await interaction.reply(`
-            **${interaction.user.username} has called a vote!\n-----------------------------------------------**
-        `)
+        const message = await interaction.reply({
+            content: 'Vote',
+            fetchReply: true
+        });
+
+        await message.react('😄')
 	},
 };
