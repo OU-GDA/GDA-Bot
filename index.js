@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Events, GatewayIntentBits, REST, Routes, Collection, Message } = require('discord.js');
+const { Client, Events, GatewayIntentBits, REST, Routes, Collection } = require('discord.js');
 const { token, clientId, guildId } = require('./config.json');
 
 // Create a new client instance
@@ -58,27 +58,35 @@ const rest = new REST().setToken(token);
 
 // Command handling
 client.on(Events.InteractionCreate, async interaction => {
-	if (interaction.isChatInputCommand()) {
-
+	try 
+	{
 		const command = interaction.client.commands.get(interaction.commandName);
 
 		if (!command) {
 			console.error(`No command matching ${interaction.commandName} was found.`);
 			return;
 		}
-		
-		try {
+
+		if (interaction.isChatInputCommand()) 
+		{
 			await command.execute(interaction);
-		} catch (error) {
-			console.error(error);
-			if (interaction.replied || interaction.deferred) {
-				await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
-			} else {
-				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-			}
+		} 
+		else if (interaction.isModalSubmit()) 
+		{
+			//TODO: Modal Submission
 		}
-	} else if (interaction.isModalSubmit()) {
-		console.log("MODAL SUBMIT")
+	} 
+	catch (error) 
+	{
+		console.error(error);
+		if (interaction.replied || interaction.deferred) 
+		{
+			await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+		} 
+		else 
+		{
+			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		}
 	}
 });
 

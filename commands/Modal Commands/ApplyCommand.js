@@ -5,6 +5,6 @@ module.exports = {
 		.setName('apply')
 		.setDescription('Apply to join the GDA officer team!'),
 	async execute(interaction) {
-
+        
 	},
 };
