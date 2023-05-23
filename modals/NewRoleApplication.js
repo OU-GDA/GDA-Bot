@@ -64,6 +64,7 @@ const SubmitModal = async (interaction) =>
     ]);
 
     await interaction.client.channels.cache.get(adminNotificationId).send({
+        content: "@everyone",
         embeds: [messageEmbed]
     });
     await interaction.reply("Your Application Has Been Successfully Received!");
