@@ -5,12 +5,10 @@ const {
 	ActionRowBuilder
 } = require('discord.js');
 
-const customId = 'officer_application_modal';
 const applicationModal = new ModalBuilder()
     .setTitle("GDA Officer Application")
-    .setCustomId(customId);
+    .setCustomId('application_modal');
 
-const nameId = 'name_input';
 const nameInput = new TextInputBuilder()
     .setLabel("What is your name?")
     .setCustomId('name_input')
@@ -19,10 +17,17 @@ const nameInput = new TextInputBuilder()
     .setRequired(true)
     .setStyle(TextInputStyle.Short);
 
-const reasonId = 'reason_input';
+const roleInput = new TextInputBuilder()
+    .setLabel("What role would you like to create?")
+    .setCustomId('new_role_input')
+    .setPlaceholder('Enter your proposed role...')
+    .setMaxLength(32)
+    .setRequired(true)
+    .setStyle(TextInputStyle.Short);
+
 const reasonInput = new TextInputBuilder()
     .setLabel("Why do you want to fill this role?")
-    .setCustomId(reasonId)
+    .setCustomId('reason_input')
     .setPlaceholder('Enter your reasoning...')
     .setMaxLength(200)
     .setRequired(true)
@@ -30,24 +35,10 @@ const reasonInput = new TextInputBuilder()
 
 applicationModal.addComponents(
     new ActionRowBuilder().addComponents(nameInput),
+    new ActionRowBuilder().addComponents(roleInput),
     new ActionRowBuilder().addComponents(reasonInput)
 );
 
-/**
- * Handle the submission of the officer application.
- * @param {Interaction<CacheType>} interaction 
- */
-const SubmitModal = async (interaction) =>
-{
-    const name = interaction.fields.getTextInputValue(nameId);
-    const reason = interaction.fields.getTextInputValue(reasonId);
-    console.log(name, reason)
-}
-
 module.exports = {
-    OfficerApplication: {
-        modal: applicationModal,
-        id: customId,
-        SubmitModal: SubmitModal
-    }
+    OfficerApplication: applicationModal
 };

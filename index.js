@@ -64,30 +64,49 @@ const rest = new REST().setToken(token);
 	}
 })();
 
+/**
+ * General Command Error
+ * @param {Interaction<CacheType>} interaction 
+ * @param {string} message 
+ */
+const HandleError = async (interaction, message) =>
+{
+	if (interaction.replied || interaction.deferred) 
+	{
+		await interaction.followUp({ content: message, ephemeral: true });
+	} 
+	else 
+	{
+		await interaction.reply({ content: message, ephemeral: true });
+	}
+}
+
 // Command handling
 client.on(Events.InteractionCreate, async interaction => {
 	try 
 	{
 		const command = interaction.client.commands.get(interaction.commandName);
-
+		
 		if (!command) 
 		{
-			if (interaction.isStringSelectMenu())
+			if (interaction.isStringSelectMenu() || interaction.isModalSubmit())
 			{
 				switch (interaction.customId)
 				{
 					case 'role_select': // Officer Application
-						await interaction.showModal(OfficerApplication);
-					break;
+						await interaction.showModal(OfficerApplication.modal);
+						break;
+					case OfficerApplication.id:
+						await OfficerApplication.SubmitModal(interaction);
+						break;
 					default:
-						await interaction.reply({ content: 'Unable To Process Selection. Please Try Again.', ephemeral: true });
-					break;
+						return await HandleError(interaction, 'Unable To Process Submission. Please Try Again.');
 				}
 			}
 			else
 			{
 				console.error(`No command matching ${interaction.commandName} was found.`);
-				return;
+				return await HandleError(interaction, `No command matching ${interaction.commandName} was found.`);
 			}
 		}
 
@@ -95,29 +114,11 @@ client.on(Events.InteractionCreate, async interaction => {
 		{
 			await command.execute(interaction);
 		} 
-		else if (interaction.isModalSubmit()) 
-		{
-			switch (interaction.customId)
-			{
-				case 'application_modal':
-				break;
-				default:
-					await interaction.reply({ content: 'Unable To Process Submission. Please Try Again.', ephemeral: true });
-				break;
-			}
-		}
 	} 
 	catch (error) 
 	{
 		console.error(error);
-		if (interaction.replied || interaction.deferred) 
-		{
-			await interaction.followUp({ content: 'There Was An Error While Executing This Command!', ephemeral: true });
-		} 
-		else 
-		{
-			await interaction.reply({ content: 'There Was An Error While Executing This Command!', ephemeral: true });
-		}
+		return await HandleError(interaction, 'There Was An Error While Executing This Command!');
 	}
 });
 
