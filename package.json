@@ -12,6 +12,7 @@
   "author": "Skyler Riggle",
   "license": "ISC",
   "dependencies": {
+    "discord-modals": "^1.3.9",
     "discord.js": "^14.10.2"
   }
 }
