@@ -1,3 +1,5 @@
+const { adminNotificationId } = require('../config.json');
+const { Embed } = require('./Embed.js');
 const { 
 	ModalBuilder, 
 	TextInputBuilder, 
@@ -41,7 +43,20 @@ const SubmitModal = async (interaction) =>
 {
     const name = interaction.fields.getTextInputValue(nameId);
     const reason = interaction.fields.getTextInputValue(reasonId);
-    console.log(name, reason)
+
+    const messageEmbed = Embed("New Position Request", 0x841617, 
+    "Someone is applying to fill a currently open officer role.", 
+    [
+        { name: 'Full Name:', value: name },
+        { name: 'Position:', value: 'TODO' },
+        { name: 'Reasoning:', value: reason }
+    ]);
+
+    await interaction.client.channels.cache.get(adminNotificationId).send({
+        content: "@everyone",
+        embeds: [messageEmbed]
+    });
+    await interaction.reply("Your Application Has Been Successfully Received!");
 }
 
 module.exports = {
