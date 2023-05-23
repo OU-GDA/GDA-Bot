@@ -1,5 +1,5 @@
 {
     "token": "TOKEN_HERE",
-    "clientId": "SERVER_ID_HERE",
-	"guildId": "APP_ID_HERE"
+    "clientId": "APP_ID_HERE",
+	"guildId": "SERVER_ID_HERE"
 }
