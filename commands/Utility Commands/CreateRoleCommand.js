@@ -1,7 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const fs = require('fs');
-
-const dataPath = './data/roles.json';
+const { StoreRole } = require('../../utils/Database');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -14,20 +12,9 @@ module.exports = {
         ),
 	async execute(interaction) {
         const newRole = interaction.options.getString("new_role");
-
-        fs.readFile(dataPath, 'utf8', async (err, data) =>
-        {
-            if (err) { console.log(err); return; }
-
-            const obj = JSON.parse(data);
-            obj.roles.push(newRole);
-
-            fs.writeFile(dataPath, JSON.stringify(obj), 'utf8', (err) => 
-            {
-                if (err) { console.log(err); return; }
-            });
-
-            await interaction.reply(`New Role ***${newRole}*** Created!`);
+        StoreRole(newRole, async (result) => {
+            result ? await interaction.reply(`New Role ***${newRole}*** Created!`)
+            : await interaction.reply(`Error Creating ***${newRole}*** Role...`);
         });
 	},
 };

@@ -1,21 +1,16 @@
 const { SlashCommandBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
-const fs = require('fs');
-
-const dataPath = './data/roles.json';
+const { GetRoles } = require('../../utils/Database');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('apply')
 		.setDescription('Apply to join the GDA officer team!'),
 	async execute(interaction) {
-        fs.readFile(dataPath, 'utf8', async (err, data) =>
-        {
-            if (err) { console.log(err); return; }
-
-            const obj = JSON.parse(data);
-            const options = [];
-
-            for (const role of obj.roles)
+        const options = [];
+        GetRoles(async (roles) => {
+            roles.push("Other");
+            
+            for (const role of roles)
             {
                 options.push(
                     new StringSelectMenuOptionBuilder()

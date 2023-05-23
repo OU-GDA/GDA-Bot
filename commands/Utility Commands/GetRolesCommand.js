@@ -1,25 +1,25 @@
 const { SlashCommandBuilder } = require('discord.js');
-const fs = require('fs');
-
-const dataPath = './data/roles.json';
+const { GetRoles } = require('../../utils/Database');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('role-get')
 		.setDescription('Return a list of all currently open officer roles.'),
 	async execute(interaction) {
-        let roles = '';
-        fs.readFile(dataPath, 'utf8', async (err, data) =>
-        {
-            if (err) { console.log(err); return; }
-
-            const obj = JSON.parse(data);
-            for (const role of obj.roles)
+        GetRoles(async (roles) => {
+            if (roles.length === 0)
             {
-                roles += `${role}\n`
+                await interaction.reply(`There Are No Roles Available...`);
+                return;
             }
 
-            await interaction.reply(`**Roles:**\n${roles}`);
+            let roleDisplay = '';
+            for (const role of roles)
+            {
+                roleDisplay += `${role}\n`;
+            }
+
+            await interaction.reply(`**Available Roles:**\n${roleDisplay}`);
         });
 	},
 };
