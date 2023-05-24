@@ -11,10 +11,10 @@ module.exports = {
             .setRequired(true)
         ),
 	async execute(interaction) {
-        const newRole = interaction.options.getString("new_role");
-        StoreRole(newRole, async (result) => {
-            result ? await interaction.reply(`New Role ***${newRole}*** Created!`)
-            : await interaction.reply(`Error Creating ***${newRole}*** Role...`);
+        const newRoles = interaction.options.getString("new_role").split(' ');
+        StoreRole(newRoles, async (result) => {
+            result ? await interaction.reply(`New Role ***${newRoles}*** Created!`)
+            : await interaction.reply(`Error Creating ***${newRoles}*** Role...`);
         });
 	},
 };

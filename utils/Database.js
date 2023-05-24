@@ -19,17 +19,18 @@ const GetRoles = (callBack) =>
 
 /**
  * Stores a new role in the database.
- * @param {string} newRole 
+ * @param {string[]} newRoles
  * @param {(result: boolean) => void} callBack 
  */
-const StoreRole = (newRole, callBack) =>
+const StoreRole = (newRoles, callBack) =>
 {
     GetRoles((roles) => {
-        if (roles.includes(newRole)) { return callBack(false); }
-        roles.push(newRole);
+        for (const role of newRoles) {
+            if (roles.includes(role)) { return callBack(false); }
+            roles.push(role);
+        }
 
-        fs.writeFile(rolePath, JSON.stringify({roles: roles}), 'utf8', (err) => 
-        {
+        fs.writeFile(rolePath, JSON.stringify({ roles: roles }), 'utf8', (err) => {
             if (err) { console.log(err); return callBack(false); }
 
             callBack(true);
@@ -39,19 +40,20 @@ const StoreRole = (newRole, callBack) =>
 
 /**
  * Remove a role from the database.
- * @param {string} targetRole 
+ * @param {string[]} targetRoles
  * @param {(result: boolean) => void} callBack 
  */
-const RemoveRole = (targetRole, callBack) =>
+const RemoveRole = (targetRoles, callBack) =>
 {
-    const searchValue = targetRole.toLowerCase();
     GetRoles((roles) => {
-        roles.splice(roles.findIndex((value) => {
-            value.toLowerCase() === searchValue;
-        }), 1);
+        for (const role of targetRoles) {
+            const searchValue = role.toLowerCase();
+            roles.splice(roles.findIndex((value) => {
+                value.toLowerCase() === searchValue;
+            }), 1);
+        }
 
-        fs.writeFile(rolePath, JSON.stringify({roles: roles}), 'utf8', (err) => 
-        {
+        fs.writeFile(rolePath, JSON.stringify({ roles: roles }), 'utf8', (err) => {
             if (err) { console.log(err); return callBack(false); }
 
             callBack(true);

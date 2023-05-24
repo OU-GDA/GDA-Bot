@@ -11,10 +11,10 @@ module.exports = {
             .setRequired(true)
         ),
 	async execute(interaction) {
-        const targetRole = interaction.options.getString("target_role");
-        RemoveRole(targetRole, async (result) => {
-            result ? await interaction.reply(`Role ***${targetRole}*** Deleted!`)
-            : await interaction.reply(`Error Removing ***${targetRole}*** Role...`);
+        const targetRoles = interaction.options.getString("target_role").split(' ');
+        RemoveRole(targetRoles, async (result) => {
+            result ? await interaction.reply(`Role ***${targetRoles}*** Deleted!`)
+            : await interaction.reply(`Error Removing ***${targetRoles}*** Role...`);
         });
 	},
 };
