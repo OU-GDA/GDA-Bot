@@ -10,6 +10,14 @@ body {
   font-weight: normal;
 }
 
+.text-light {
+  color: #b3b7bd !important;
+}
+
+.bg {
+  background-color: #313338 !important;
+}
+
 .bg-gray {
   background-color: #2b2d31 !important;
 }

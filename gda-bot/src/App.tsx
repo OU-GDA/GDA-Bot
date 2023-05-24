@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Application from "./pages/Application";
 
 const App = () =>
 {
@@ -6,7 +7,7 @@ const App = () =>
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<p>Base Route</p>} />
+                    <Route path="/" element={<Application/>} />
                 </Routes>
             </BrowserRouter>
         </>
