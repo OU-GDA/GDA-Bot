@@ -35,9 +35,9 @@ const Handler = async (interaction) =>
 				switch (interaction.customId)
 				{
 					case 'role_select': // Open An Officer Application
-                        const roleSelection = "President"
-                        if (roleSelection === "Other") 
-                        { 
+						const roleSelection = interaction.values[0]
+                        if (roleSelection === "other")
+						{ 
                             await interaction.showModal(NewRoleApplication.modal); 
                         }
                         else
