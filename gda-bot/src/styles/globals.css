@@ -9,3 +9,11 @@ body {
   color: white;
   font-weight: normal;
 }
+
+.bg-gray {
+  background-color: #2b2d31 !important;
+}
+
+.bg-dark-gray {
+  background-color: #27282c !important;
+}
