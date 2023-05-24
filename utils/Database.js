@@ -48,9 +48,12 @@ const RemoveRole = (targetRoles, callBack) =>
     GetRoles((roles) => {
         for (const role of targetRoles) {
             const searchValue = role.toLowerCase();
-            roles.splice(roles.findIndex((value) => {
-                value.toLowerCase() === searchValue;
-            }), 1);
+            const index = roles.findIndex((value) => {
+                return value.toLowerCase() == searchValue;
+            }); 
+            
+            if (index >= 0) { roles.splice(index, 1); }
+            else { return callBack(false); }
         }
 
         fs.writeFile(rolePath, JSON.stringify({ roles: roles }), 'utf8', (err) => {
