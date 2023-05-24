@@ -1,6 +1,5 @@
 const { OfficerApplication } = require('../modals/OfficerApplication.js');
 const { NewRoleApplication } = require('../modals/NewRoleApplication.js');
-const { GetRoles } = require('./Database.js')
 
 /**
  * General Command Error
@@ -36,16 +35,15 @@ const Handler = async (interaction) =>
 				switch (interaction.customId)
 				{
 					case 'role_select': // Open An Officer Application
-                        const roleSelection = "Other"
+                        const roleSelection = "President"
                         if (roleSelection === "Other") 
                         { 
                             await interaction.showModal(NewRoleApplication.modal); 
                         }
                         else
-                        {
-                            GetRoles(async (roles) => {
-                                await interaction.showModal(OfficerApplication.modal);
-                            });
+						{
+							OfficerApplication.SetRole(roleSelection);
+                            await interaction.showModal(OfficerApplication.modal);
                         }
 						break;
 					case OfficerApplication.id: // Base Officer Application Submission

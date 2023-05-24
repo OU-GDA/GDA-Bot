@@ -35,6 +35,9 @@ applicationModal.addComponents(
     new ActionRowBuilder().addComponents(reasonInput)
 );
 
+var role = 'ERROR';
+const SetRole = (newRole) => { role = newRole; }
+
 /**
  * Handle the submission of the officer application.
  * @param {Interaction<CacheType>} interaction 
@@ -48,7 +51,7 @@ const SubmitModal = async (interaction) =>
     "Someone is applying to fill a currently open officer role.", 
     [
         { name: 'Full Name:', value: name },
-        { name: 'Position:', value: 'TODO' },
+        { name: 'Position:', value: role },
         { name: 'Reasoning:', value: reason }
     ]);
 
@@ -63,6 +66,7 @@ module.exports = {
     OfficerApplication: {
         modal: applicationModal,
         id: customId,
+        SetRole: SetRole,
         SubmitModal: SubmitModal
     }
 };
