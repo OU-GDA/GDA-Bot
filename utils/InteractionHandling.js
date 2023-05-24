@@ -36,14 +36,14 @@ const Handler = async (interaction) =>
 				{
 					case 'role_select': // Open An Officer Application
 						const roleSelection = interaction.values[0]
-                        if (roleSelection === "other")
+                        if (roleSelection != "other")
 						{ 
-                            await interaction.showModal(NewRoleApplication.modal); 
+							OfficerApplication.SetRole(roleSelection);
+                            await interaction.showModal(OfficerApplication.modal);
                         }
                         else
 						{
-							OfficerApplication.SetRole(roleSelection);
-                            await interaction.showModal(OfficerApplication.modal);
+							await interaction.showModal(NewRoleApplication.modal); 
                         }
 						break;
 					case OfficerApplication.id: // Base Officer Application Submission
