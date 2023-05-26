@@ -10,7 +10,7 @@ interface PageFrameProps
 const PageFrame = (props: PageFrameProps) =>
 {
     return (
-        <Stack direction="vertical">
+        <Stack direction="vertical" style={{paddingBottom:'30px'}}>
             <h4 className="fw-bold mb-3">{props.title}</h4>
             {props.description && 
                 <h5 className="text-light">{props.description}</h5>
@@ -18,7 +18,8 @@ const PageFrame = (props: PageFrameProps) =>
 
             {props.children}
 
-            <div className="bg w-100 position-fixed bottom-0" style={{height:'30px'}}/>
+            <div className="bg w-100 position-fixed bottom-0"
+            style={{ height: '30px' }} />
         </Stack>
     );
 }
