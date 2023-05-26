@@ -33,3 +33,13 @@ body {
 .bg-light-gray {
   background-color: #b3b7bd !important;
 }
+
+.btn {
+  width: fit-content;
+  background-color: #5865f2;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #4752c4;
+}

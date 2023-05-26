@@ -6,7 +6,7 @@ const App = () =>
 {
     return (
         <>
-            <NavBar />
+            <NavBar onHamburgerMenu={() => console.log("HAMBURGER!")} />
             
             <BrowserRouter>
                 <Routes>
