@@ -1,11 +1,18 @@
 import { useState } from "react";
 import InputField from "../components/InputField";
 import PageFrame from "../components/PageFrame";
+import Button from "react-bootstrap/Button";
 
 const Application = () =>
 {
     const [token, setToken] = useState<string>('');
     const [appID, setAppID] = useState<string>('');
+    const [serverID, setServerID] = useState<string>('');
+
+    const LaunchBot = () =>
+    {
+        
+    }
 
     return (
         <PageFrame
@@ -24,6 +31,16 @@ const Application = () =>
                 defaultValue={appID}
                 onEdit={setAppID}
             />
+            <InputField
+                label={"Server ID"}
+                description="The current server for the active instance of the bot."
+                defaultValue={serverID}
+                onEdit={setServerID}
+            />
+
+            <Button onClick={LaunchBot}>
+                Launch
+            </Button>
         </PageFrame>
     );
 }
