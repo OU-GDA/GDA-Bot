@@ -3,7 +3,7 @@ const NavBar = () =>
     return (
         <>
             <div
-                className="position-fixed top-0 w-100 d-flex px-4 align-items-center"
+                className="position-fixed top-0 w-100 d-flex d-lg-none px-4 align-items-center"
                 style={{ height: '40px', backgroundColor:'#111214' }}
             >
                 <div className="me-4" style={{width:'18px'}}>
@@ -14,6 +14,8 @@ const NavBar = () =>
 
                 <span>OU GDA BOT | DEVELOPER PORTAL</span>
             </div>
+
+            <div className="mb-5 d-block d-lg-none">-</div>
         </>
     );
 }
