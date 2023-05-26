@@ -14,12 +14,14 @@ const Application = () =>
         >
             <InputField
                 label={"Bot Token"}
-                placeholder="Enter Token..."
+                description="The Discord bot application token. Note that this should be made private and may be changed often."
+                defaultValue={token}
                 onEdit={setToken}
             />
             <InputField
                 label={"Application ID"}
-                placeholder="Enter App ID..."
+                description="The constant Discord application ID."
+                defaultValue={appID}
                 onEdit={setAppID}
             />
         </PageFrame>

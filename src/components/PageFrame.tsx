@@ -10,7 +10,7 @@ interface PageFrameProps
 const PageFrame = (props: PageFrameProps) =>
 {
     return (
-        <Stack direction="vertical" className="mt-5 mx-4 px-2" style={{paddingBottom:'30px'}}>
+        <Stack direction="vertical" className="mt-5 pt-5 mx-4 px-2" style={{paddingBottom:'30px'}}>
             <h4 className="fw-bold mb-3">{props.title}</h4>
             {props.description && 
                 <h5 className="text-light">{props.description}</h5>

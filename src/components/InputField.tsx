@@ -4,7 +4,6 @@ interface InputFieldProps
 {
     label: string;
     description?: string;
-    placeholder?: string;
     defaultValue?: string;
     onEdit?: (value: string) => void;
 }
@@ -18,7 +17,6 @@ const InputField = (props: InputFieldProps) =>
             <Form.Control
                 className="bg-dark-gray border-heavy mt-2 mb-3 text-white"
                 defaultValue={props.defaultValue}
-                placeholder={props.placeholder}
                 onChange={(event) => {
                     if (props.onEdit)
                     {
