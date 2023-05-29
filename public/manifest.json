@@ -1,6 +1,6 @@
 {
-  "short_name": "Bot Interface",
-  "name": "OU GDA Discord Bot Interface",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
