@@ -7,7 +7,7 @@ const Core = () =>
 {
     return (
         <>
-            <Navbar />
+            <Navbar onHamburgerClick={() => console.log("HELLO")} />
 
             <Stack direction="horizontal">
                 <Sidebar />

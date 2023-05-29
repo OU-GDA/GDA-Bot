@@ -34,6 +34,20 @@ body {
   background-color: #b3b7bd !important;
 }
 
+.bg-dark {
+  background-color: #111214 !important;
+}
+
+.nav-btn {
+  background-color: #747f8d;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.nav-btn:hover {
+  background-color: #b3b7bd;
+}
+
 .btn {
   width: fit-content;
   background-color: #5865f2;
