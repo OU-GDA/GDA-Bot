@@ -1,0 +1,20 @@
+{
+  "name": "gda-bot",
+  "version": "1.0.0",
+  "description": "The official Discord bot for the Game Developers Association at the University of Oklahoma.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "Discord",
+    "GDA",
+    "OU"
+  ],
+  "author": "Skyler Riggle",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1"
+  }
+}
