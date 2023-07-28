@@ -26,7 +26,8 @@ function set(key, value)
  */
 function get(key)
 {
-
+    const data = require('../data.json');
+    return data[key];
 }
 
 // We gather the functions here to act as a pseudo namespace
