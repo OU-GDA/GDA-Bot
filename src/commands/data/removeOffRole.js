@@ -2,8 +2,8 @@ const { SlashCommandBuilder, Interaction } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('rmv-role')
-        .setDescription('Removes a self-assignable role.'),
+        .setName('rmv-officer')
+        .setDescription('Removes an officer role.'),
     
     /**
      * Send the role assignment message
