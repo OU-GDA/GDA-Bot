@@ -18,12 +18,21 @@ module.exports = {
 	async execute(interaction)
     {
         // Parse the voting options from the user
-        const options = interaction.options.getString("items").split(',');
-        const icons = getEmojis(options.length);
+        const options = interaction.options.getString("items")
+            .replaceAll(/( )*,( )*/g, ',')
+            .split(',')
+            .filter((option) => option.length > 0);
+        
+        // No valid options check
+        const numOptions = options.length;
+        if (numOptions === 0) { throw "No Valid Arguments."; }
+        
+        // Get a list of random emojis for voting
+        const icons = getEmojis(numOptions);
 
         // Generate the choices string
         let choicesString = '';
-        for (let idx = 0; idx < options.length; idx++)
+        for (let idx = 0; idx < numOptions; idx++)
         {
             choicesString += `${icons[idx]} ${options[idx]}\n\n`    
         }
