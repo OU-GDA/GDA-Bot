@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const initDatabase = require('./src/utils/database');
+const DB = require('./src/utils/database');
 const {
     REST,
     Routes,
@@ -25,7 +25,7 @@ client.once(Events.ClientReady, (clientParam) => {
     console.log(`Client Logged In As: [${clientParam.user.tag}]`);
 });
 
-initDatabase();
+DB.init();
 
 ///  COMMANDS  ////////////////////////////////////////////////////////////////
 
