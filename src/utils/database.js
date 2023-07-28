@@ -1,11 +1,11 @@
 const fs = require('node:fs');
+const dataPath = 'src/data.json';
 
 /**
  * Initialize the bot's data files
  */
 function init()
 {
-    const dataPath = 'src/data.json';
     if (!fs.existsSync(dataPath)) { fs.appendFileSync(dataPath, '{}'); }
 }
 
@@ -16,7 +16,9 @@ function init()
  */
 function set(key, value)
 {
-
+    const data = require('../data.json');
+    data[key] = value;
+    fs.writeFileSync(dataPath, JSON.stringify(data));
 }
 
 /**
