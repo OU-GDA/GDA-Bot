@@ -27,7 +27,7 @@ client.once(Events.ClientReady, (clientParam) => {
 ///  COMMANDS  ////////////////////////////////////////////////////////////////
 
 // Create a new empty list of commands
-commands = [];
+const commands = [];
 client.commands = new Collection();
 
 // Gather all command files
