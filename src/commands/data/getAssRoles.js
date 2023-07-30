@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('Lists all currently assignable roles.'),
     
     /**
-     * Send the role assignment message
+     * Display all assignable roles
      * @param {Interaction<CacheType>} interaction 
      */
 	async execute(interaction)
