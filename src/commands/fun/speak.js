@@ -11,7 +11,7 @@ module.exports = {
         ),
     
     /**
-     * Send the role assignment message
+     * Make J-ROD send a given phrase
      * @param {Interaction<CacheType>} interaction 
      */
 	async execute(interaction)
