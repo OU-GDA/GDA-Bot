@@ -30,7 +30,7 @@ module.exports = {
         // Get role data
         const roleTitle = interaction.options.getString("title").trim();
         const roleDescription = interaction.options.getString("description").trim();
-        const roleDiscord = interaction.options.getRole('role'); // TODO: SAVE ROLE DATA
+        const roleDiscord = interaction.options.getRole('role');
 
         // Valid argument check
         if (!roleTitle || !roleDescription) { throw "Invalid Arguments Given!"; }
@@ -39,7 +39,9 @@ module.exports = {
         const roles = DB.get('off_roles') ?? [];
         roles.push({
             title: roleTitle,
-            description: roleDescription
+            description: roleDescription,
+            roleId: roleDiscord.id,
+            roleName: roleDiscord.name
         });
         DB.set('off_roles', roles);
         

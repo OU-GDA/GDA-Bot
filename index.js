@@ -60,6 +60,10 @@ for (const folder of commandFolders)
     }
 }
 
+// Set the bots interaction protocol
+const handleInteraction = require('./src/utils/interactionHandler');
+client.on(Events.InteractionCreate, handleInteraction);
+
 // Create a new instance of the REST module
 const rest = new REST().setToken(process.env.TOKEN);
 
@@ -88,13 +92,7 @@ async function registerCommands()
 }
 
 // Register the gathered commands
-registerCommands();
-
-// Set the bots interaction protocol
-const handleInteraction = require('./src/utils/interactionHandler');
-client.on(Events.InteractionCreate, handleInteraction);
-    
-///  LOGIN  ///////////////////////////////////////////////////////////////////
-
-// Log in to Discord
-client.login(process.env.TOKEN);
+registerCommands().then(() => {
+    // Log in to Discord
+    client.login(process.env.TOKEN);
+});
